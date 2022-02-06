@@ -2709,6 +2709,18 @@ public class InputManagerService extends IInputManager.Stub
             AudioManager audioManager = mContext.getSystemService(AudioManager.class);
             audioManager.setMicrophoneMuteFromSwitch(micMute);
         }
+
+        if ((switchMask & 0x80000) != 0) {
+            final boolean open = ((switchValues & 0x80000) != 0);
+            Settings.System.putInt(mContext.getContentResolver(),
+                    "triggerleft", open ? 1 : 0);
+        }
+
+        if ((switchMask & 0x100000) != 0) {
+            final boolean open = ((switchValues & 0x100000) != 0);
+            Settings.System.putInt(mContext.getContentResolver(),
+                    "triggerright", open ? 1 : 0);
+        }
     }
 
     // Native callback.
