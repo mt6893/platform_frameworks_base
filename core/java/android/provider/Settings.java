@@ -6023,6 +6023,12 @@ public final class Settings {
          */
         public static final String VOLUME_PANEL_ON_LEFT = "volume_panel_on_left";
 
+       /**
+         * Force show navigation bar setting.
+         * @hide
+         */
+        public static final String FORCE_SHOW_NAVBAR = "force_show_navbar";
+
         /**
          * IMPORTANT: If you add a new public settings you also have to add it to
          * PUBLIC_SETTINGS below. If the new setting is hidden you have to add
