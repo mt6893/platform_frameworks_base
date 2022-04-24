@@ -74,18 +74,6 @@
     <!-- Custom notification light -->
     <java-symbol type="bool" name="config_multicolorled" />
 
-    <!-- Whether device has dash charging support -->
-    <java-symbol type="bool" name="config_hasDashCharger" />
-
-    <!-- Whether device has warp charging support -->
-    <java-symbol type="bool" name="config_hasWarpCharger" />
-
-    <!-- Whether device has VOOC charging support -->
-    <java-symbol type="bool" name="config_hasVoocCharger" />
-
-    <!-- Whether device has SuperDart charging support -->
-    <java-symbol type="bool" name="config_hasSuperDartCharger" />
-
     <!-- SystemUI Restart -->
     <java-symbol type="string" name="systemui_restart_title" />
     <java-symbol type="string" name="systemui_restart_message" />
@@ -122,4 +110,6 @@
 
     <!-- NightLight FOD -->
     <java-symbol type="bool" name="disable_fod_night_light"/>
+
+    <java-symbol type="string" name="config_oemFastChargeNodePath" />
 </resources>

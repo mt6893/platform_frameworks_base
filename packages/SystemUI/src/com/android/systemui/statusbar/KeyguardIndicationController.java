@@ -816,9 +816,6 @@ public class KeyguardIndicationController {
             return mContext.getResources().getString(R.string.keyguard_charged);
         }
 
-        final boolean hasSuperDartCharger = mContext.getResources().getBoolean(
-                com.android.internal.R.bool.config_hasSuperDartCharger);
-
         final boolean hasChargingTime = mChargingTimeRemaining > 0;
         if (mPowerPluggedInWired) {
             switch (mChargingSpeed) {
@@ -826,25 +823,6 @@ public class KeyguardIndicationController {
                     chargingId = hasChargingTime
                             ? R.string.keyguard_indication_charging_time_fast
                             : R.string.keyguard_plugged_in_charging_fast;
-                    break;
-                case BatteryStatus.CHARGING_DASH:
-                    chargingId = hasChargingTime
-                            ? R.string.keyguard_indication_dash_charging_time
-                            : R.string.keyguard_plugged_in_dash_charging;
-                    break;
-                case BatteryStatus.CHARGING_WARP:
-                    chargingId = hasChargingTime
-                            ? R.string.keyguard_indication_warp_charging_time
-                            : R.string.keyguard_plugged_in_warp_charging;
-                    break;
-                case BatteryStatus.CHARGING_VOOC:
-                    chargingId = hasChargingTime
-                            ? (hasSuperDartCharger
-                                    ? R.string.keyguard_indication_superdart_charging_time
-                                    : R.string.keyguard_indication_vooc_charging_time)
-                            : (hasSuperDartCharger
-                                    ? R.string.keyguard_plugged_in_superdart_charging
-                                    : R.string.keyguard_plugged_in_vooc_charging);
                     break;
                 case BatteryStatus.CHARGING_SLOWLY:
                     chargingId = hasChargingTime
@@ -902,9 +880,18 @@ public class KeyguardIndicationController {
                     mContext, mChargingTimeRemaining);
             String chargingText = mContext.getResources().getString(chargingId, chargingTimeFormatted,
                     percentage);
+            if (mChargingSpeed == BatteryStatus.CHARGING_OEM_FAST) {
+                chargingText = percentage + " • " +
+                        mContext.getResources().getString(R.string.keyguard_plugged_in_oem_fast_charging) + "(" +
+                        chargingTimeFormatted + "Until full)";
+            }
             return chargingText + batteryInfo;
         } else {
             String chargingText =  mContext.getResources().getString(chargingId, percentage);
+            if (mChargingSpeed == BatteryStatus.CHARGING_OEM_FAST) {
+                chargingText = percentage + " • " +
+                        mContext.getResources().getString(R.string.keyguard_plugged_in_oem_fast_charging);
+            }
             return chargingText + batteryInfo;
         }
     }
